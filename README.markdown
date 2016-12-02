@@ -43,8 +43,9 @@ Using the Powershell version
     then add the following line:
 
         Import-Module PasswdGen
+*   If your Powershell execution policy does not allow scripts, duplicate a powershell shortcut and add `-ExecutionPolicy Unrestricted` to the command line; use that shortcut to start Powershell when using the scripts
 
-Next time you start Powershell, you can use the following commands:
+Next time you start Powershell (with the appropriate execution policy), you can use the following commands:
 
     Get-StrongPw site1 [site2...]
     Get-StdPw    site1 [site2...]
