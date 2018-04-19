@@ -107,7 +107,7 @@ function Get-StrongPw {
     #>
     if($args.length -eq 0) { return }
 
-    $key = Read-Host -Prompt "Encryption key:" -AsSecureString
+    $key = Read-Host -Prompt "Encryption key" -AsSecureString
     $strkey = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($key))
 
     foreach ($i in $args)
@@ -148,7 +148,7 @@ function Get-StdPw {
     #>
     if($args.length -eq 0) { return }
 
-    $key = Read-Host -Prompt "Encryption key:" -AsSecureString
+    $key = Read-Host -Prompt "Encryption key" -AsSecureString
     $strkey = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($key))
 
     foreach ($i in $args)
