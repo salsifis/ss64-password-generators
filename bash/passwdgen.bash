@@ -18,11 +18,15 @@ ss64pwd_sha256sum() {
     fi
 }
 
+ss64pwd_find_clipboard_manager() {
+    which gclip || which pbcopy
+}
+
 ss64pwd_to_clipboard() {
-    if (($1==1)) && which gclip &> /dev/null
+    if (($1==1)) && clm=$(ss64pwd_find_clipboard_manager)
     then
-        gclip # consumes stdin
-        echo '(in clipboard)'
+        eval ${clm} # consumes stdin
+        echo -n '(in clipboard)'
     else
         cat # consumes stdin
     fi
@@ -48,6 +52,7 @@ strongpw() {
             ss64pwd_to_clipboard $one_arg
         shift
     done
+    echo
     echo -n 'Verification code: '
     echo -n ":$key:" | ss64pwd_sha256sum | perl -ne "s/([0-9a-f]{2})/print chr hex \$1/gie" | base64 | tr +/ Ea | cut -b 1-20
 }
