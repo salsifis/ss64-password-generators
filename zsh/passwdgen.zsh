@@ -19,8 +19,12 @@ ss64pwd_sha256sum() {
     fi
 }
 
+ss64pwd_find_clipboard_manager() {
+    which gclip pbcopy | grep -v 'not found'
+}
+
 ss64pwd_to_clipboard() {
-    if (($1==1)) && (clm=$(which gclip) || clm=$(which pbcopy))
+    if (($1==1)) && clm=$(ss64pwd_find_clipboard_manager)
     then
         eval ${clm} # consumes stdin
         echo -n '(in clipboard)'

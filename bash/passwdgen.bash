@@ -19,7 +19,7 @@ ss64pwd_sha256sum() {
 }
 
 ss64pwd_find_clipboard_manager() {
-    which gclip || which pbcopy
+    which gclip pbxcopy | grep -v 'not found'
 }
 
 ss64pwd_to_clipboard() {
