@@ -8,6 +8,7 @@ There are two password generators:
 Here there are three versions of each of these generators:
 
 *   Bash
+*   zsh
 *   Powershell
 *   Standalone HTML + Javascript
 
@@ -20,6 +21,27 @@ Using the bash version
         source passwdgen.bash
 
 Next time you start bash, you can use the following commands:
+
+    strongpw site1 [site2...]
+    stdpw    site1 [site2...]
+
+You will be prompted for the master key. Then, if there is only one site
+specified, you will get the password into the clipboard, else passwords will be
+echoed in your terminal.
+
+An additional verification code will appear, that will be always the same
+(depends only on the typed-in master key). It can help you detect whether you
+mistyped your key.
+
+Using the zsh version
+----------------------
+
+*   copy `passwdgen.zsh` from the `zsh` subdirectory into your home directory
+*   add the following line to your `.zshrc`:
+
+        source passwdgen.zsh
+
+Next time you start zsh, you can use the following commands:
 
     strongpw site1 [site2...]
     stdpw    site1 [site2...]

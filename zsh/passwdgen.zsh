@@ -1,5 +1,6 @@
-#!/bin/bash
-
+# The original script comes from https://github.com/salsifis/ss64-password-generators
+# Modificatied to adapt for zsh and macOS clipboard
+#
 ss64pwd_sha1sum() {
     if which sha1sum &> /dev/null
     then
@@ -36,7 +37,7 @@ strongpw() {
     [[ "$1" != "" ]] || return
     one_arg=0
     (($#==1)) && one_arg=1
-    read -rs -p 'Encryption key: ' key
+    read -rs 'key?Encryption key: '
     [[ "$key" != "" ]] || return
     echo ''
     while [[ "$1" != "" ]]
@@ -61,7 +62,7 @@ stdpw() {
     [[ "$1" != "" ]] || return
     one_arg=0
     (($#==1)) && one_arg=1
-    read -rs -p 'Encryption key: ' key
+    read -rs 'key?Encryption key: '
     [[ "$key" != "" ]] || return
     echo ''
     while [[ "$1" != "" ]]
@@ -77,7 +78,7 @@ stdpw() {
             ss64pwd_to_clipboard $one_arg
         shift
     done
+    echo
     echo -n 'Verification code: '
     echo -n ":$key:" | ss64pwd_sha256sum | perl -ne "s/([0-9a-f]{2})/print chr hex \$1/gie" | base64 | tr +/ Ea | cut -b 1-20
 }
-
