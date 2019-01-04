@@ -20,14 +20,23 @@ ss64pwd_sha256sum() {
 }
 
 ss64pwd_find_clipboard_manager() {
-    which gclip pbcopy | grep -v -m 1 'not found'
+    which gclip pbcopy xclip | grep -v -m 1 'not found'
 }
 
 ss64pwd_to_clipboard() {
     if (($1==1)) && clm=$(ss64pwd_find_clipboard_manager)
     then
-        eval ${clm} # consumes stdin
-        echo -n '(in clipboard)'
+        case $(basename $clm) in
+            (gclip|pbcopy) eval ${clm} # consumes stdin
+                echo -n '(in clipboard)'
+                ;;
+            (xclip) eval "${clm} -selection clipboard" # consumes stdin
+                echo -n '(in clipboard)'
+                ;;
+            (*)
+                cat # consumes stdin
+                ;;
+        esac
     else
         cat # consumes stdin
     fi
